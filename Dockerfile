@@ -7,20 +7,22 @@ RUN apk --no-cache update && \
     pip --no-cache-dir install awscli && \
     rm -rf /var/cache/apk/*
 
-COPY update-route53.sh .
-RUN dos2unix update-route53.sh
-RUN chmod +x update-route53.sh
+COPY update-route53.sh /etc/periodic/15min/update-route53
+RUN dos2unix /etc/periodic/15min/update-route53
+RUN chmod +x /etc/periodic/15min/update-route53
 
-ADD crontab /etc/cron.d/update-route53
-RUN dos2unix /etc/cron.d/update-route53
-RUN chmod 0644 /etc/cron.d/update-route53
-RUN /usr/bin/crontab /etc/cron.d/update-route53
+CMD ["crond", "-fS"]
 
-COPY start.sh .
-RUN dos2unix start.sh
-RUN chmod +x start.sh
+#ADD crontab /etc/cron.d/update-route53
+#RUN dos2unix /etc/cron.d/update-route53
+#RUN chmod 0644 /etc/cron.d/update-route53
+#RUN /usr/bin/crontab /etc/cron.d/update-route53
 
-CMD ["./start.sh"]
+#COPY start.sh .
+#RUN dos2unix start.sh
+#RUN chmod +x start.sh
+
+#CMD ["./start.sh"]
 
 
 
