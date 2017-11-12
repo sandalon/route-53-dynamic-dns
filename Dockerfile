@@ -13,23 +13,6 @@ RUN chmod +x /etc/periodic/15min/update-route53
 
 CMD ["crond", "-fS"]
 
-#ADD crontab /etc/cron.d/update-route53
-#RUN dos2unix /etc/cron.d/update-route53
-#RUN chmod 0644 /etc/cron.d/update-route53
-#RUN /usr/bin/crontab /etc/cron.d/update-route53
-
-#COPY start.sh .
-#RUN dos2unix start.sh
-#RUN chmod +x start.sh
-
-#CMD ["./start.sh"]
-
-
-
-#CMD ["crond", "-L 2", "-f"]
-
-#CMD "./update-route53.sh"
-
 # Required Environment Variables
 
 # AWS_ACCESS_KEY_ID
